@@ -1,5 +1,5 @@
 # Gradient-View
-A Swift 3 UIView class with a gradient customizable in the storyboard (colors, direction, shadows, cornerRadius...)
+A Swift 4 UIView class with a gradient customizable in the storyboard (colors, direction, shadows, cornerRadius...)
 
 GradientView: UIView is a @IBDesignable class so that it's rendered in your storyboard, and all its properties are @IBInspectable so that you can customize your gradient view inside the storyboard in the Attributes inspector.
 
