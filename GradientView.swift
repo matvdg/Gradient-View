@@ -3,26 +3,26 @@
 //  testTile
 //
 //  Created by Mathieu Vandeginste on 06/12/2016.
-//  Copyright © 2016 Mathieu Vandeginste. All rights reserved.
+//  Copyright © 2017 Mathieu Vandeginste. All rights reserved.
 //
 
 import UIKit
 
 @IBDesignable class GradientView: UIView {
     
-    @IBInspectable var topColor: UIColor = UIColor.white {
+    @IBInspectable var startColor: UIColor = .blue {
         didSet {
             setNeedsLayout()
         }
     }
    
-    @IBInspectable var bottomColor: UIColor = UIColor.black {
+    @IBInspectable var endColor: UIColor = .green {
         didSet {
             setNeedsLayout()
         }
     }
     
-    @IBInspectable var shadowColor: UIColor = UIColor.black {
+    @IBInspectable var shadowColor: UIColor = .yellow {
         didSet {
             setNeedsLayout()
         }
@@ -82,7 +82,7 @@ import UIKit
     
     override func layoutSubviews() {
         let gradientLayer = layer as! CAGradientLayer
-        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
         gradientLayer.startPoint = CGPoint(x: startPointX, y: startPointY)
         gradientLayer.endPoint = CGPoint(x: endPointX, y: endPointY)
         layer.cornerRadius = cornerRadius
