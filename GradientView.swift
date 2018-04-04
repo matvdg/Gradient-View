@@ -1,28 +1,29 @@
 //
 //  GradientView.swift
-//  testTile
 //
 //  Created by Mathieu Vandeginste on 06/12/2016.
-//  Copyright © 2017 Mathieu Vandeginste. All rights reserved.
+//  Copyright © 2018 Mathieu Vandeginste. All rights reserved.
 //
 
 import UIKit
 
 @IBDesignable class GradientView: UIView {
-    
-    @IBInspectable var startColor: UIColor = .blue {
-        didSet {
-            setNeedsLayout()
-        }
-    }
    
-    @IBInspectable var endColor: UIColor = .green {
+    private var gradientLayer: CAGradientLayer!
+    
+    @IBInspectable var topColor: UIColor = .red {
         didSet {
             setNeedsLayout()
         }
     }
     
-    @IBInspectable var shadowColor: UIColor = .yellow {
+    @IBInspectable var bottomColor: UIColor = .yellow {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    @IBInspectable var shadowColor: UIColor = .clear {
         didSet {
             setNeedsLayout()
         }
@@ -52,19 +53,19 @@ import UIKit
         }
     }
     
-    @IBInspectable var startPointY: CGFloat = 0 {
+    @IBInspectable var startPointY: CGFloat = 0.5 {
         didSet {
             setNeedsLayout()
         }
     }
     
-    @IBInspectable var endPointX: CGFloat = 0 {
+    @IBInspectable var endPointX: CGFloat = 1 {
         didSet {
             setNeedsLayout()
         }
     }
     
-    @IBInspectable var endPointY: CGFloat = 0 {
+    @IBInspectable var endPointY: CGFloat = 0.5 {
         didSet {
             setNeedsLayout()
         }
@@ -81,15 +82,29 @@ import UIKit
     }
     
     override func layoutSubviews() {
-        let gradientLayer = layer as! CAGradientLayer
-        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
-        gradientLayer.startPoint = CGPoint(x: startPointX, y: startPointY)
-        gradientLayer.endPoint = CGPoint(x: endPointX, y: endPointY)
-        layer.cornerRadius = cornerRadius
-        layer.shadowColor = shadowColor.cgColor
-        layer.shadowOffset = CGSize(width: shadowX, height: shadowY)
-        layer.shadowRadius = shadowBlur
-        layer.shadowOpacity = 1
+        self.gradientLayer = self.layer as! CAGradientLayer
+        self.gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        self.gradientLayer.startPoint = CGPoint(x: startPointX, y: startPointY)
+        self.gradientLayer.endPoint = CGPoint(x: endPointX, y: endPointY)
+        self.layer.cornerRadius = cornerRadius
+        self.layer.shadowColor = shadowColor.cgColor
+        self.layer.shadowOffset = CGSize(width: shadowX, height: shadowY)
+        self.layer.shadowRadius = shadowBlur
+        self.layer.shadowOpacity = 1
+        
+    }
+    
+    func animate(duration: TimeInterval, newTopColor: UIColor, newBottomColor: UIColor) {
+        let fromColors = self.gradientLayer?.colors
+        let toColors: [AnyObject] = [ newTopColor.cgColor, newBottomColor.cgColor]
+        self.gradientLayer?.colors = toColors
+        let animation : CABasicAnimation = CABasicAnimation(keyPath: "colors")
+        animation.fromValue = fromColors
+        animation.toValue = toColors
+        animation.duration = duration
+        animation.isRemovedOnCompletion = true
+        animation.fillMode = kCAFillModeForwards
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.gradientLayer?.add(animation, forKey:"animateGradient")
     }
 }
-
