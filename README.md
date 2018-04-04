@@ -13,5 +13,6 @@ GradientView: UIView is a @IBDesignable class so that it's rendered in your stor
   * you can choose the shadow position (x/y) and its blur
   * the direction of the gradient (top left is 0,0 and bottom right is 1,1) from the start point to the end point
   * the corner radius of your view
+  * you can animate the gradient to another one by calling the `animate(duration: TimeInterval, newTopColor: UIColor, newBottomColor: UIColor)`method
 
 ![Image of Gradient View](https://raw.githubusercontent.com/matvdg/Gradient-View/master/example.png)
