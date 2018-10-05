@@ -8,7 +8,7 @@
 import UIKit
 
 @IBDesignable class GradientView: UIView {
-   
+    
     private var gradientLayer: CAGradientLayer!
     
     @IBInspectable var topColor: UIColor = .red {
@@ -82,7 +82,7 @@ import UIKit
     }
     
     override func layoutSubviews() {
-        self.gradientLayer = self.layer as! CAGradientLayer
+        self.gradientLayer = self.layer as? CAGradientLayer
         self.gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
         self.gradientLayer.startPoint = CGPoint(x: startPointX, y: startPointY)
         self.gradientLayer.endPoint = CGPoint(x: endPointX, y: endPointY)
@@ -103,8 +103,8 @@ import UIKit
         animation.toValue = toColors
         animation.duration = duration
         animation.isRemovedOnCompletion = true
-        animation.fillMode = kCAFillModeForwards
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.fillMode = .forwards
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         self.gradientLayer?.add(animation, forKey:"animateGradient")
     }
 }
