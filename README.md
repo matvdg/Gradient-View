@@ -16,3 +16,7 @@ GradientView: UIView is a @IBDesignable class so that it's rendered in your stor
   * you can animate the gradient to another one by calling the `animate(duration: TimeInterval, newTopColor: UIColor, newBottomColor: UIColor)`method
 
 ![Image of Gradient View](https://raw.githubusercontent.com/matvdg/Gradient-View/master/example.png)
+
+## Quick Note
+
+This is only for editing UIViews. Although it will work on other classes (buttons, etc.), the text that comes with those will be behind the gradient color. For this reason, if you wish to add it to other classes (buttons), you will need to composite a label on top of it so that you can still see the text.
